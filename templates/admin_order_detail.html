@@ -1,0 +1,249 @@
+{% extends "base.html" %}
+
+{% block title %}Заказ #{{ order.id }} - Админ панель{% endblock %}
+
+{% block extra_css %}
+<style>
+    .order-detail-card {
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        overflow: hidden;
+    }
+    
+    .order-header {
+        background: linear-gradient(135deg, #FFB6C1, #FFC0CB);
+        color: white;
+        padding: 30px;
+    }
+    
+    .order-info {
+        padding: 30px;
+    }
+    
+    .info-section {
+        border-bottom: 1px solid #e9ecef;
+        padding-bottom: 20px;
+        margin-bottom: 20px;
+    }
+    
+    .info-section:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+        margin-bottom: 0;
+    }
+    
+    .info-label {
+        font-weight: 600;
+        color: #FFB6C1;
+        margin-bottom: 5px;
+    }
+    
+    .status-form {
+        background: #f8f9fa;
+        border-radius: 10px;
+        padding: 20px;
+        margin-top: 20px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <!-- Навигация -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="{{ url_for('admin_dashboard') }}">
+                            <i class="fas fa-tachometer-alt me-1"></i>
+                            Админ панель
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">
+                        Заказ #{{ order.id }}
+                    </li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-lg-8">
+            <!-- Детали заказа -->
+            <div class="order-detail-card">
+                <div class="order-header">
+                    <div class="row align-items-center">
+                        <div class="col-md-8">
+                            <h1 class="mb-2">
+                                <i class="fas fa-shopping-cart me-2"></i>
+                                Заказ #{{ order.id }}
+                            </h1>
+                            <p class="mb-0">
+                                <i class="fas fa-calendar me-2"></i>
+                                {{ order.order_date.strftime('%d.%m.%Y в %H:%M') }}
+                            </p>
+                        </div>
+                        <div class="col-md-4 text-md-end">
+                            <span class="badge bg-light text-dark fs-6">
+                                {{ order.status }}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="order-info">
+                    <!-- Информация о клиенте -->
+                    <div class="info-section">
+                        <h4 class="mb-3">
+                            <i class="fas fa-user me-2 text-primary"></i>
+                            Информация о клиенте
+                        </h4>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <div class="info-label">Имя:</div>
+                                <div>{{ order.customer_name }}</div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="info-label">Email:</div>
+                                <div>
+                                    <a href="mailto:{{ order.customer_email }}">{{ order.customer_email }}</a>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="info-label">Телефон:</div>
+                                <div>
+                                    <a href="tel:{{ order.customer_phone }}">{{ order.customer_phone }}</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Информация о товаре -->
+                    <div class="info-section">
+                        <h4 class="mb-3">
+                            <i class="fas fa-box me-2 text-primary"></i>
+                            Информация о товаре
+                        </h4>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <div class="info-label">Тип товара:</div>
+                                <div>{{ order.product_type }}</div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="info-label">Цвета:</div>
+                                <div>{{ order.colors or 'Не указано' }}</div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="info-label">Размеры:</div>
+                                <div>{{ order.sizes or 'Не указано' }}</div>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="info-label">Описание заказа:</div>
+                            <div class="p-3 bg-light rounded">
+                                {{ order.description }}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Адрес доставки -->
+                    <div class="info-section">
+                        <h4 class="mb-3">
+                            <i class="fas fa-map-marker-alt me-2 text-primary"></i>
+                            Адрес доставки
+                        </h4>
+                        <div class="p-3 bg-light rounded">
+                            {{ order.delivery_address }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-4">
+            <!-- Действия -->
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-tools me-2"></i>
+                        Действия
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <!-- Изменение статуса -->
+                    <div class="status-form">
+                        <h6 class="mb-3">Изменить статус заказа</h6>
+                        <form method="POST" action="{{ url_for('update_order_status', order_id=order.id) }}">
+                            <div class="mb-3">
+                                <select name="status" class="form-select">
+                                    <option value="Новый" {% if order.status == 'Новый' %}selected{% endif %}>Новый</option>
+                                    <option value="В обработке" {% if order.status == 'В обработке' %}selected{% endif %}>В обработке</option>
+                                    <option value="Завершен" {% if order.status == 'Завершен' %}selected{% endif %}>Завершен</option>
+                                    <option value="Отменен" {% if order.status == 'Отменен' %}selected{% endif %}>Отменен</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">
+                                <i class="fas fa-save me-2"></i>
+                                Обновить статус
+                            </button>
+                        </form>
+                    </div>
+                    
+                    <hr>
+                    
+                    <!-- Быстрые действия -->
+                    <div class="d-grid gap-2">
+                        <a href="mailto:{{ order.customer_email }}?subject=Заказ #{{ order.id }}" 
+                           class="btn btn-outline-primary">
+                            <i class="fas fa-envelope me-2"></i>
+                            Написать клиенту
+                        </a>
+                        
+                        <a href="tel:{{ order.customer_phone }}" 
+                           class="btn btn-outline-success">
+                            <i class="fas fa-phone me-2"></i>
+                            Позвонить клиенту
+                        </a>
+                        
+                        <button onclick="window.print()" 
+                                class="btn btn-outline-secondary">
+                            <i class="fas fa-print me-2"></i>
+                            Печать заказа
+                        </button>
+                        
+                        <a href="{{ url_for('admin_dashboard') }}" 
+                           class="btn btn-outline-dark">
+                            <i class="fas fa-arrow-left me-2"></i>
+                            Назад к списку
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Информация о заказе -->
+            <div class="card mt-3">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-info-circle me-2"></i>
+                        Информация
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row text-center">
+                        <div class="col-6">
+                            <div class="text-muted">ID заказа</div>
+                            <strong>#{{ order.id }}</strong>
+                        </div>
+                        <div class="col-6">
+                            <div class="text-muted">Дата создания</div>
+                            <strong>{{ order.order_date.strftime('%d.%m') }}</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

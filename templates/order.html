@@ -1,0 +1,366 @@
+{% extends "base.html" %}
+
+{% block title %}Оформить заказ - Лиза вяжет{% endblock %}
+
+{% block extra_css %}
+<style>
+    .order-form {
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        padding: 40px;
+    }
+    
+    .form-section {
+        border-bottom: 2px solid #f8f9fa;
+        padding-bottom: 30px;
+        margin-bottom: 30px;
+    }
+    
+    .form-section:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+        margin-bottom: 0;
+    }
+    
+    .product-card {
+        border: 2px solid #e9ecef;
+        border-radius: 15px;
+        padding: 20px;
+        margin-bottom: 15px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    
+    .product-card:hover {
+        border-color: var(--secondary-color);
+        transform: translateY(-2px);
+    }
+    
+    .product-card.selected {
+        border-color: #FF69B4;
+        background-color: var(--light-bg);
+    }
+    
+    .color-option {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: 3px solid #fff;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    
+    .color-option:hover {
+        transform: scale(1.1);
+    }
+    
+    .color-option.selected {
+        border-color: #FF69B4;
+        transform: scale(1.1);
+    }
+    
+    .size-option {
+        border: 2px solid #e9ecef;
+        border-radius: 10px;
+        padding: 10px 15px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-align: center;
+    }
+    
+    .size-option:hover {
+        border-color: var(--secondary-color);
+    }
+    
+    .size-option.selected {
+        border-color: #FF69B4;
+        background-color: #FF69B4;
+        color: white;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="text-center mb-5">
+                    <h1 class="display-4 fw-bold">Оформить заказ</h1>
+                    <p class="lead text-muted">Заполните форму ниже, и мы создадим для вас уникальное изделие</p>
+                </div>
+                
+                <form method="POST" class="order-form">
+                    <!-- Контактная информация -->
+                    <div class="form-section">
+                        <h3 class="mb-4">
+                            <i class="fas fa-user me-2 text-primary"></i>
+                            Контактная информация
+                        </h3>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="customer_name" class="form-label">Ваше имя *</label>
+                                <input type="text" class="form-control" id="customer_name" name="customer_name" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="customer_email" class="form-label">Email *</label>
+                                <input type="email" class="form-control" id="customer_email" name="customer_email" required>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="customer_phone" class="form-label">Номер телефона *</label>
+                            <input type="tel" class="form-control" id="customer_phone" name="customer_phone" required>
+                        </div>
+                    </div>
+                    
+                    <!-- Выбор товара -->
+                    <div class="form-section">
+                        <h3 class="mb-4">
+                            <i class="fas fa-shopping-cart me-2 text-primary"></i>
+                            Выберите товар
+                        </h3>
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <div class="product-card" data-product="корзинки">
+                                    <div class="text-center">
+                                        <i class="fas fa-shopping-basket fa-2x text-primary mb-2"></i>
+                                        <h5>Корзинки</h5>
+                                        <p class="text-muted">Уютные вязаные корзинки для хранения</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="product-card" data-product="сумки">
+                                    <div class="text-center">
+                                        <i class="fas fa-shopping-bag fa-2x text-primary mb-2"></i>
+                                        <h5>Сумки</h5>
+                                        <p class="text-muted">Стильные вязаные сумки</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="product-card" data-product="тапочки">
+                                    <div class="text-center">
+                                        <i class="fas fa-shoe-prints fa-2x text-primary mb-2"></i>
+                                        <h5>Тапочки</h5>
+                                        <p class="text-muted">Мягкие вязаные тапочки</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <div class="product-card" data-product="брелки">
+                                    <div class="text-center">
+                                        <i class="fas fa-key fa-2x text-primary mb-2"></i>
+                                        <h5>Брелки</h5>
+                                        <p class="text-muted">Очаровательные вязаные брелки</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 mb-3">
+                                <div class="product-card" data-product="ваши предложения">
+                                    <div class="text-center">
+                                        <i class="fas fa-lightbulb fa-2x text-primary mb-2"></i>
+                                        <h5>Ваши предложения</h5>
+                                        <p class="text-muted">Есть идея? Расскажите нам!</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <input type="hidden" id="product_type" name="product_type" required>
+                    </div>
+                    
+                    <!-- Описание -->
+                    <div class="form-section">
+                        <h3 class="mb-4">
+                            <i class="fas fa-edit me-2 text-primary"></i>
+                            Описание заказа
+                        </h3>
+                        
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Подробное описание того, что вы хотите *</label>
+                            <textarea class="form-control" id="description" name="description" rows="4" 
+                                      placeholder="Опишите, что именно вы хотите заказать, какие особенности изделия важны для вас..." required></textarea>
+                        </div>
+                    </div>
+                    
+                    <!-- Цвета -->
+                    <div class="form-section">
+                        <h3 class="mb-4">
+                            <i class="fas fa-palette me-2 text-primary"></i>
+                            Выберите цвета
+                        </h3>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Предпочитаемые цвета</label>
+                            <div class="d-flex flex-wrap gap-3">
+                                <div class="color-option" style="background-color: #8B4513;" data-color="Коричневый"></div>
+                                <div class="color-option" style="background-color: #DEB887;" data-color="Бежевый"></div>
+                                <div class="color-option" style="background-color: #F5DEB3;" data-color="Светло-бежевый"></div>
+                                <div class="color-option" style="background-color: #000000;" data-color="Черный"></div>
+                                <div class="color-option" style="background-color: #FFFFFF; border: 1px solid #ccc;" data-color="Белый"></div>
+                                <div class="color-option" style="background-color: #FF6B6B;" data-color="Красный"></div>
+                                <div class="color-option" style="background-color: #4ECDC4;" data-color="Бирюзовый"></div>
+                                <div class="color-option" style="background-color: #45B7D1;" data-color="Голубой"></div>
+                                <div class="color-option" style="background-color: #96CEB4;" data-color="Мятный"></div>
+                                <div class="color-option" style="background-color: #FFEAA7;" data-color="Желтый"></div>
+                                <div class="color-option" style="background-color: #DDA0DD;" data-color="Розовый"></div>
+                                <div class="color-option" style="background-color: #98D8C8;" data-color="Зеленый"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="colors" class="form-label">Дополнительные пожелания по цветам</label>
+                            <input type="text" class="form-control" id="colors" name="colors" 
+                                   placeholder="Например: сочетание белого и голубого, или укажите другие цвета...">
+                        </div>
+                    </div>
+                    
+                    <!-- Размеры -->
+                    <div class="form-section">
+                        <h3 class="mb-4">
+                            <i class="fas fa-ruler me-2 text-primary"></i>
+                            Размеры
+                        </h3>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Выберите размер</label>
+                            <div class="row">
+                                <div class="col-md-3 mb-2">
+                                    <div class="size-option" data-size="XS">XS</div>
+                                </div>
+                                <div class="col-md-3 mb-2">
+                                    <div class="size-option" data-size="S">S</div>
+                                </div>
+                                <div class="col-md-3 mb-2">
+                                    <div class="size-option" data-size="M">M</div>
+                                </div>
+                                <div class="col-md-3 mb-2">
+                                    <div class="size-option" data-size="L">L</div>
+                                </div>
+                                <div class="col-md-3 mb-2">
+                                    <div class="size-option" data-size="XL">XL</div>
+                                </div>
+                                <div class="col-md-3 mb-2">
+                                    <div class="size-option" data-size="XXL">XXL</div>
+                                </div>
+                                <div class="col-md-6 mb-2">
+                                    <div class="size-option" data-size="По размеру">По размеру</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="sizes" class="form-label">Дополнительные пожелания по размерам</label>
+                            <input type="text" class="form-control" id="sizes" name="sizes" 
+                                   placeholder="Например: длина 30 см, ширина 20 см, или другие размеры...">
+                        </div>
+                    </div>
+                    
+                    <!-- Адрес доставки -->
+                    <div class="form-section">
+                        <h3 class="mb-4">
+                            <i class="fas fa-map-marker-alt me-2 text-primary"></i>
+                            Адрес доставки
+                        </h3>
+                        
+                        <div class="alert alert-info mb-3">
+                            <h6><i class="fas fa-info-circle me-2"></i>Информация о доставке:</h6>
+                            <ul class="mb-0">
+                                <li><strong>Минск:</strong> Бесплатная доставка по городу</li>
+                                <li><strong>РБ:</strong> Доставка по почте (Белпочта или Европочта)</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="delivery_address" class="form-label">Полный адрес доставки *</label>
+                            <textarea class="form-control" id="delivery_address" name="delivery_address" rows="3" 
+                                      placeholder="Укажите полный адрес доставки: город, улица, дом, квартира, индекс..." required></textarea>
+                        </div>
+                    </div>
+                    
+                    <!-- Кнопка отправки -->
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary btn-lg">
+                            <i class="fas fa-paper-plane me-2"></i>
+                            Отправить заказ
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Выбор товара
+    const productCards = document.querySelectorAll('.product-card');
+    productCards.forEach(card => {
+        card.addEventListener('click', function() {
+            productCards.forEach(c => c.classList.remove('selected'));
+            this.classList.add('selected');
+            document.getElementById('product_type').value = this.dataset.product;
+        });
+    });
+    
+    // Выбор цветов
+    const colorOptions = document.querySelectorAll('.color-option');
+    const selectedColors = [];
+    
+    colorOptions.forEach(option => {
+        option.addEventListener('click', function() {
+            const color = this.dataset.color;
+            if (this.classList.contains('selected')) {
+                this.classList.remove('selected');
+                const index = selectedColors.indexOf(color);
+                if (index > -1) {
+                    selectedColors.splice(index, 1);
+                }
+            } else {
+                this.classList.add('selected');
+                selectedColors.push(color);
+            }
+            updateColorsInput();
+        });
+    });
+    
+    function updateColorsInput() {
+        const colorsInput = document.getElementById('colors');
+        if (selectedColors.length > 0) {
+            colorsInput.value = 'Выбранные цвета: ' + selectedColors.join(', ');
+        } else {
+            colorsInput.value = '';
+        }
+    }
+    
+    // Выбор размеров
+    const sizeOptions = document.querySelectorAll('.size-option');
+    sizeOptions.forEach(option => {
+        option.addEventListener('click', function() {
+            sizeOptions.forEach(o => o.classList.remove('selected'));
+            this.classList.add('selected');
+            document.getElementById('sizes').value = 'Выбранный размер: ' + this.dataset.size;
+        });
+    });
+    
+    // Валидация формы
+    const form = document.querySelector('form');
+    form.addEventListener('submit', function(e) {
+        const productType = document.getElementById('product_type').value;
+        if (!productType) {
+            e.preventDefault();
+            alert('Пожалуйста, выберите товар');
+            return;
+        }
+    });
+});
+</script>
+{% endblock %}

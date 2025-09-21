@@ -1,0 +1,285 @@
+{% extends "base.html" %}
+
+{% block title %}Контакты - Лиза вяжет{% endblock %}
+
+{% block extra_css %}
+<style>
+    .contact-card {
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        padding: 40px;
+        margin-bottom: 30px;
+    }
+    
+    .social-link {
+        display: inline-block;
+        padding: 15px 25px;
+        margin: 10px;
+        border-radius: 15px;
+        text-decoration: none;
+        color: white;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        text-align: center;
+        min-width: 200px;
+    }
+    
+    .social-link:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        color: white;
+    }
+    
+    .instagram {
+        background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);
+    }
+    
+    .telegram {
+        background: linear-gradient(45deg, #0088cc, #229ED9);
+    }
+    
+    .vkontakte {
+        background: linear-gradient(45deg, #4C75A3, #5B7FA6);
+    }
+    
+    .contact-form {
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        padding: 40px;
+    }
+    
+    .contact-method {
+        border: 2px solid #e9ecef;
+        border-radius: 15px;
+        padding: 20px;
+        margin-bottom: 15px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    
+    .contact-method:hover {
+        border-color: var(--secondary-color);
+        transform: translateY(-2px);
+    }
+    
+    .contact-method.selected {
+        border-color: #FF69B4;
+        background-color: var(--light-bg);
+    }
+    
+    .contact-method i {
+        font-size: 2rem;
+        margin-bottom: 10px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h1 class="display-4 fw-bold">Свяжитесь с нами</h1>
+            <p class="lead text-muted">Выберите удобный способ связи или заполните форму</p>
+        </div>
+        
+        <div class="row">
+            <!-- Информация о рукодельнице -->
+            <div class="col-lg-6">
+                <div class="contact-card">
+                    <div class="text-center mb-4">
+                        <i class="fas fa-user-circle fa-4x text-primary mb-3"></i>
+                        <h3>Лизавета Имховик</h3>
+                        <p class="text-muted">Рукодельница "Лиза вяжет", создающая уникальные вязаные изделия</p>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h5><i class="fas fa-heart me-2 text-primary"></i>О мастере</h5>
+                        <p>Создаю красивые вязаные изделия с любовью и вниманием к каждой детали. Каждое изделие уникально и создается специально для вас.</p>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h5><i class="fas fa-clock me-2 text-primary"></i>Время работы</h5>
+                        <p>Принимаю заказы ежедневно с 9:00 до 21:00</p>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h5><i class="fas fa-map-marker-alt me-2 text-primary"></i>Доставка</h5>
+                        <p><strong>Минск:</strong> Бесплатная доставка по городу</p>
+                        <p><strong>РБ:</strong> По почте (Белпочта или Европочта)</p>
+                    </div>
+                </div>
+                
+                <!-- Социальные сети -->
+                <div class="contact-card">
+                    <h4 class="text-center mb-4">
+                        <i class="fas fa-share-alt me-2 text-primary"></i>
+                        Мы в социальных сетях
+                    </h4>
+                    
+                    <div class="text-center">
+                        <a href="https://www.instagram.com/lisavetaimhovik" target="_blank" class="social-link instagram">
+                            <i class="fab fa-instagram me-2"></i>
+                            Instagram
+                        </a>
+                        
+                        <a href="https://t.me/+aTJolCNiC_RmNDVi" target="_blank" class="social-link telegram">
+                            <i class="fab fa-telegram me-2"></i>
+                            Telegram канал
+                        </a>
+                        
+                        <a href="#" class="social-link vkontakte">
+                            <i class="fab fa-vk me-2"></i>
+                            ВКонтакте
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Форма связи -->
+            <div class="col-lg-6">
+                <div class="contact-form">
+                    <h3 class="text-center mb-4">
+                        <i class="fas fa-comments me-2 text-primary"></i>
+                        Форма связи
+                    </h3>
+                    
+                    <form method="POST">
+                        <!-- Выбор способа связи -->
+                        <div class="mb-4">
+                            <label class="form-label">Предпочитаемый способ связи *</label>
+                            <div class="row">
+                                <div class="col-md-4 mb-2">
+                                    <div class="contact-method text-center" data-method="telegram">
+                                        <i class="fab fa-telegram text-primary"></i>
+                                        <div>Telegram</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-2">
+                                    <div class="contact-method text-center" data-method="vkontakte">
+                                        <i class="fab fa-vk text-primary"></i>
+                                        <div>ВКонтакте</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-2">
+                                    <div class="contact-method text-center" data-method="instagram">
+                                        <i class="fab fa-instagram text-primary"></i>
+                                        <div>Instagram</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="hidden" id="contact_method" name="contact_method" required>
+                        </div>
+                        
+                        <!-- Контактная информация -->
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="contact_name" class="form-label">Ваше имя *</label>
+                                <input type="text" class="form-control" id="contact_name" name="contact_name" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="contact_phone" class="form-label">Номер телефона</label>
+                                <input type="tel" class="form-control" id="contact_phone" name="contact_phone">
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="contact_username" class="form-label">Ваш username в выбранной сети</label>
+                            <input type="text" class="form-control" id="contact_username" name="contact_username" 
+                                   placeholder="Например: @username или ссылка на профиль">
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="contact_subject" class="form-label">Тема сообщения *</label>
+                            <select class="form-select" id="contact_subject" name="contact_subject" required>
+                                <option value="">Выберите тему</option>
+                                <option value="заказ">Хочу заказать изделие</option>
+                                <option value="вопрос">У меня есть вопрос</option>
+                                <option value="обсуждение">Хочу обсудить дизайн</option>
+                                <option value="другое">Другое</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label for="contact_message" class="form-label">Ваше сообщение *</label>
+                            <textarea class="form-control" id="contact_message" name="contact_message" rows="5" 
+                                      placeholder="Опишите, что вас интересует..." required></textarea>
+                        </div>
+                        
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="fas fa-paper-plane me-2"></i>
+                                Отправить сообщение
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Дополнительная информация -->
+        <div class="row mt-5">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h4 class="mb-3">
+                            <i class="fas fa-info-circle me-2 text-primary"></i>
+                            Как мы работаем
+                        </h4>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <i class="fas fa-comments fa-2x text-primary mb-2"></i>
+                                <h6>1. Свяжитесь с нами</h6>
+                                <p class="text-muted">Выберите удобный способ связи</p>
+                            </div>
+                            <div class="col-md-3">
+                                <i class="fas fa-palette fa-2x text-primary mb-2"></i>
+                                <h6>2. Обсудим дизайн</h6>
+                                <p class="text-muted">Определим цвета, размеры и стиль</p>
+                            </div>
+                            <div class="col-md-3">
+                                <i class="fas fa-hands-helping fa-2x text-primary mb-2"></i>
+                                <h6>3. Создаем изделие</h6>
+                                <p class="text-muted">Вяжем с любовью и вниманием к деталям</p>
+                            </div>
+                            <div class="col-md-3">
+                                <i class="fas fa-gift fa-2x text-primary mb-2"></i>
+                                <h6>4. Доставляем</h6>
+                                <p class="text-muted">Бесплатно по Минску<br>По почте по РБ</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Выбор способа связи
+    const contactMethods = document.querySelectorAll('.contact-method');
+    contactMethods.forEach(method => {
+        method.addEventListener('click', function() {
+            contactMethods.forEach(m => m.classList.remove('selected'));
+            this.classList.add('selected');
+            document.getElementById('contact_method').value = this.dataset.method;
+        });
+    });
+    
+    // Валидация формы
+    const form = document.querySelector('form');
+    form.addEventListener('submit', function(e) {
+        const contactMethod = document.getElementById('contact_method').value;
+        if (!contactMethod) {
+            e.preventDefault();
+            alert('Пожалуйста, выберите способ связи');
+            return;
+        }
+    });
+});
+</script>
+{% endblock %}

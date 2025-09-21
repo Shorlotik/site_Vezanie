@@ -1,0 +1,203 @@
+{% extends "base.html" %}
+
+{% block title %}Доставка - Лиза вяжет{% endblock %}
+
+{% block extra_css %}
+<style>
+    .delivery-card {
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(255, 182, 193, 0.2);
+        padding: 40px;
+        margin-bottom: 30px;
+        border-left: 5px solid #FFB6C1;
+    }
+    
+    .delivery-icon {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 2rem;
+        margin: 0 auto 20px;
+    }
+    
+    .delivery-step {
+        background: #FFF0F5;
+        border-radius: 15px;
+        padding: 25px;
+        margin-bottom: 20px;
+        border-left: 4px solid #FFC0CB;
+    }
+    
+    .delivery-step h5 {
+        color: #FF69B4;
+        margin-bottom: 10px;
+    }
+    
+    .price-info {
+        background: linear-gradient(135deg, #FFE4E1, #FFC0CB);
+        border-radius: 15px;
+        padding: 25px;
+        text-align: center;
+        margin: 20px 0;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h1 class="display-4 fw-bold">Доставка</h1>
+            <p class="lead text-muted">Удобные способы получения ваших заказов</p>
+        </div>
+        
+        <div class="row">
+            <!-- Доставка по Минску -->
+            <div class="col-lg-6">
+                <div class="delivery-card">
+                    <div class="delivery-icon">
+                        <i class="fas fa-city"></i>
+                    </div>
+                    <h3 class="text-center mb-4">Доставка по Минску</h3>
+                    
+                    <div class="price-info">
+                        <h4 class="text-primary mb-2">БЕСПЛАТНО</h4>
+                        <p class="mb-0">Доставка по всему городу</p>
+                    </div>
+                    
+                    <div class="delivery-step">
+                        <h5><i class="fas fa-clock me-2"></i>Время доставки</h5>
+                        <p>1-2 дня после готовности заказа</p>
+                    </div>
+                    
+                    <div class="delivery-step">
+                        <h5><i class="fas fa-map-marker-alt me-2"></i>Зоны доставки</h5>
+                        <p>Все районы Минска: Центральный, Советский, Первомайский, Партизанский, Заводской, Ленинский, Октябрьский, Московский, Фрунзенский</p>
+                    </div>
+                    
+                    <div class="delivery-step">
+                        <h5><i class="fas fa-phone me-2"></i>Согласование</h5>
+                        <p>Свяжемся с вами для уточнения удобного времени доставки</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Доставка по РБ -->
+            <div class="col-lg-6">
+                <div class="delivery-card">
+                    <div class="delivery-icon">
+                        <i class="fas fa-mail-bulk"></i>
+                    </div>
+                    <h3 class="text-center mb-4">Доставка по РБ</h3>
+                    
+                    <div class="price-info">
+                        <h4 class="text-primary mb-2">ПО ПОЧТЕ</h4>
+                        <p class="mb-0">Белпочта или Европочта</p>
+                    </div>
+                    
+                    <div class="delivery-step">
+                        <h5><i class="fas fa-shipping-fast me-2"></i>Способы доставки</h5>
+                        <ul class="mb-0">
+                            <li><strong>Белпочта:</strong> Доставка до почтового отделения</li>
+                            <li><strong>Европочта:</strong> Доставка до пункта выдачи</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="delivery-step">
+                        <h5><i class="fas fa-clock me-2"></i>Сроки доставки</h5>
+                        <p>3-7 дней в зависимости от региона</p>
+                    </div>
+                    
+                    <div class="delivery-step">
+                        <h5><i class="fas fa-money-bill-wave me-2"></i>Стоимость</h5>
+                        <p>Рассчитывается индивидуально в зависимости от веса и региона</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Как происходит доставка -->
+        <div class="row mt-5">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h3 class="text-center mb-4">
+                            <i class="fas fa-route me-2 text-primary"></i>
+                            Как происходит доставка
+                        </h3>
+                        
+                        <div class="row">
+                            <div class="col-md-3 text-center mb-4">
+                                <div class="delivery-icon" style="width: 60px; height: 60px; font-size: 1.5rem;">
+                                    <i class="fas fa-phone"></i>
+                                </div>
+                                <h6>1. Согласование</h6>
+                                <p class="text-muted">Связываемся для уточнения деталей</p>
+                            </div>
+                            
+                            <div class="col-md-3 text-center mb-4">
+                                <div class="delivery-icon" style="width: 60px; height: 60px; font-size: 1.5rem;">
+                                    <i class="fas fa-calendar"></i>
+                                </div>
+                                <h6>2. Выбор времени</h6>
+                                <p class="text-muted">Определяем удобное время доставки</p>
+                            </div>
+                            
+                            <div class="col-md-3 text-center mb-4">
+                                <div class="delivery-icon" style="width: 60px; height: 60px; font-size: 1.5rem;">
+                                    <i class="fas fa-truck"></i>
+                                </div>
+                                <h6>3. Доставка</h6>
+                                <p class="text-muted">Привозим заказ или отправляем почтой</p>
+                            </div>
+                            
+                            <div class="col-md-3 text-center mb-4">
+                                <div class="delivery-icon" style="width: 60px; height: 60px; font-size: 1.5rem;">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                                <h6>4. Получение</h6>
+                                <p class="text-muted">Проверяем качество и получаем оплату</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Важная информация -->
+        <div class="row mt-4">
+            <div class="col-12">
+                <div class="alert alert-warning">
+                    <h5><i class="fas fa-exclamation-triangle me-2"></i>Важная информация</h5>
+                    <ul class="mb-0">
+                        <li>При заказе укажите точный адрес доставки</li>
+                        <li>Для доставки по РБ потребуется паспортные данные получателя</li>
+                        <li>Оплата производится при получении заказа</li>
+                        <li>Возможна предоплата для заказов по РБ</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Кнопки действий -->
+        <div class="row mt-4">
+            <div class="col-12 text-center">
+                <a href="{{ url_for('order') }}" class="btn btn-primary btn-lg me-3">
+                    <i class="fas fa-shopping-cart me-2"></i>
+                    Оформить заказ
+                </a>
+                <a href="{{ url_for('contact') }}" class="btn btn-outline-primary btn-lg">
+                    <i class="fas fa-comments me-2"></i>
+                    Уточнить детали
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
