@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none" role="img" aria-labelledby="logoTitle">
+  <title id="logoTitle">Вяжем вместе</title>
+  <defs>
+    <linearGradient id="vmBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffb6c1"/>
+      <stop offset="50%" stop-color="#ffc9d4"/>
+      <stop offset="100%" stop-color="#ffc0cb"/>
+    </linearGradient>
+  </defs>
+  <!-- Контрастное кольцо: читается на светлом hero и на розовой шапке -->
+  <circle cx="100" cy="100" r="97" fill="url(#vmBg)" stroke="rgba(74, 47, 61, 0.28)" stroke-width="3"/>
+  <g stroke="#4a2f3d" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M118 128c16-8 22-26 14-42-8-16-27-20-43-12"/>
+    <path d="M89 134c-18-6-28-24-22-42 6-18 25-26 43-20"/>
+    <path d="M100 138c-24 0-44-18-44-42s20-42 44-42"/>
+  </g>
+  <g stroke="#4a2f3d" stroke-linecap="round" stroke-linejoin="round">
+    <line x1="72" y1="148" x2="108" y2="62" stroke-width="6"/>
+    <line x1="128" y1="148" x2="92" y2="62" stroke-width="6"/>
+    <circle cx="100" cy="58" r="6" fill="#4a2f3d" stroke="none"/>
+  </g>
+</svg>

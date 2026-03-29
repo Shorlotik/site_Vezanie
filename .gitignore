@@ -60,6 +60,9 @@ Thumbs.db
 *.tmp
 *.temp
 
+# Frontend
+frontend/node_modules/
+
 # Email backup files
 orders_backup/
 contact_messages_backup/
