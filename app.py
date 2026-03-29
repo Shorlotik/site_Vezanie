@@ -11,6 +11,10 @@ from sqlalchemy import inspect, text
 from werkzeug.security import check_password_hash, generate_password_hash
 
 load_dotenv()
+# Render.com: Secret Files лежат в /etc/secrets/<имя файла>, не в корне приложения
+_render_env = "/etc/secrets/.env"
+if os.path.isfile(_render_env):
+    load_dotenv(_render_env, override=True)
 
 
 def _password_is_hashed(value: str) -> bool:
